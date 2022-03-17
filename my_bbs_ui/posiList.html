@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+    <div id="postList">
+        <div class="header">
+            <div class="not-login">
+                <span>登录</span>&nbsp;<span>注册</span>
+            </div>
+        </div>
+        <div class="header2"></div>
+        <div class="send_post">
+            <el-button type="primary">发帖</el-button>
+        </div>
+        <div class="post_list">
+            <table>
+                <thead>
+                    <tr>
+                        <td colspan="2">
+                            <span>全部主题</span><span>热门</span>
+                            <span>最新</span><span>热帖</span>
+                            <span>精华</span>
+                        </td>
+                        <td>作者</td>
+                        <td>回复</td>
+                        <td>查看</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td style="width:32px; height: 32px;">
+                        <img src="./小哲.jpg" alt="" style="width:200px; height: 158px;">
+                    </td>
+                    <td>
+                        <span>
+                            <a href="./postDetails.html" class="post_type"> [帖子种类]</a>
+                            <a href="./postDetails.html"> 帖子标题</a>
+                        </span>
+                    </td>
+                    <td style="width:135px;">
+                        <p>GJ</p>
+                        <p>2022-02-22</p>
+                    </td>
+                    <td style="width:66 px;">
+                        <p>511</p>
+                        <p>1640</p>
+                    </td>
+                    <td style="width:120px;">
+                        <p>ZZH</p>
+                        <p>2022-02-22</p>
+                    </td>
+                </tbody>
+            </table>
+        </div>
+        <div class="post_page">
+            <el-pagination background layout="prev, pager, next" :total="1000">
+            </el-pagination>
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#postList',
+    });
+</script>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    a{
+        text-decoration: none;
+        color: #333;
+    }
+
+    a.post_type{
+        color: blue;
+    }
+
+    a:hover{
+        /* text-decoration: underline; */
+        color:blue;
+    }
+
+    .header {
+        width: 100%;
+        height: 36px;
+        padding-top: 10px;
+        padding-right: 10px;
+        background-color: #000;
+        text-align: right;
+    }
+
+    .header .not-login {
+        color: aliceblue;
+    }
+
+    .send_post {
+        width: 98%;
+        margin: auto;
+    }
+
+    .post_list {
+        width: 98%;
+        margin: auto;
+        border: 1px solid #ccc;
+        border-bottom: 0 none;
+    }
+
+    .post_list table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    .post_list table thead td {
+        background-color: #eee;
+        height: 40px;
+        width: 100%;
+
+    }
+
+    .post_list table thead td span {
+        margin-left: 16px;
+        color: blue !important;
+    }
+
+    .post_list table tr td {
+        border-bottom: 1px solid #ccc;
+        height: 40px;
+    }
+
+    .post_list table tr td span {
+        color: blue;
+    }
+
+    .post_list table tr td p:last-child {
+        color: #999;
+    }
+
+    .post_page{
+        text-align: right;
+        margin-bottom: 36px;
+    }
+</style>
+
+</html>

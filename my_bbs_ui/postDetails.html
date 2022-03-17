@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 富文本编辑器 -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+
+
+</head>
+
+<body>
+    <div id="postDetails">
+        <div class="send-post">
+            <el-button type="primary" size="small">回帖</el-button>
+        </div>
+        <div class="reply_content">
+            <div class="post_title">
+                <div class="left">查看：511 | 回复：1129</div>
+                <div class="right">这是一个帖子标题</div>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <div class="content_item">
+                    <div class="left">
+                        <div class="user_no">511291640</div>
+                        <div class="user_info"><img src="./hug.jpg" alt="" style="width: 150px;height: 150px;">
+                            <p>GJ</p>
+                            <p>29</p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="end_time">发表于2022-02-22</div>
+                        <div class="content_detail">这是内容</div>
+                        <div class="content_foot">
+                            <span>回复</span><span>顶</span><span>踩</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="reply_page">
+            <el-pagination background layout="prev, pager, next" :total="20">
+            </el-pagination>
+        </div>
+        <div class="write_pad">
+            <div id="content" style="height: 200px;"></div>
+            <p>
+            <el-button type="primary" size="small" >发送</el-button>
+            </p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#postDetails',
+        mounted() {
+            ClassicEditor
+                .create(document.querySelector('#content'))
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    });
+</script>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    #postDetails {
+        padding: 20px;
+    }
+
+    .send-post {
+        height: 50px;
+        margin-top: 36px;
+    }
+
+    .reply_page {
+        text-align: right;
+    }
+
+    .reply_content .post_title {
+        background-color: #c2D5E3;
+        height: 36px;
+        line-height: 36px;
+        font-size: 14px;
+        border-bottom: 6px solid#c2D5E3;
+    }
+
+    .reply_content .post_title .left {
+        width: 200px;
+        float: left;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .content_item {
+        border-bottom: 6px solid #c2d5e3;
+    }
+
+    .content_item .left {
+        background-color: #e5edf2;
+        text-align: center;
+        width: 200px;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .content_item .left .user_no {
+        height: 36px;
+        line-height: 36px;
+        border-bottom: 1px #ccc dashed;
+    }
+
+    .content_item .left .user_info {
+        padding-top: 16px;
+    }
+
+    .content_item .left .user_info img {
+        border: 5px solid #fff;
+    }
+
+    .content_item .left .user_info p {
+        text-align-last: left;
+        padding-left: 25px;
+        font-size: 13px;
+    }
+
+    .content_item .right {
+        min-height: 252px;
+        background-color: #fff;
+        font-size: 14px;
+    }
+
+    .content_item .right .send_item {
+        height: 36px;
+        line-height: 36px;
+        border-bottom: 1px #ccc dashed;
+    }
+
+    .content_item .right .content_detail {
+        min-height: 180px;
+    }
+
+    .content_item .right .content_foot {
+        height: 36px;
+        line-height: 36px;
+    }
+
+    .content_item .right .content_foot {
+        margin-right: 16px;
+    }
+
+    .write_pad{
+        width: 90%;
+        margin: auto;
+    }
+
+    .write_pad p{
+        margin-top: 10px;
+    }
+
+</style>
+
+</html>
