@@ -11,32 +11,35 @@ namespace myBbsWebApi.Dal
 {
     public class UserDal
     {
-        public bool GetUserByUserNameAndPassword(string UserName, string Password)
+        public List<Users> GetAll()
+        {
+            DataTable res = SqlHelper.ExecuteTable("Select * from Users");
+            List<Users> userList = ToModelList(res);
+            return userList;
+        }
+
+        public List<Users> GetUserByUserNameAndPassword(string UserName, string Password)
         {
             DataTable res = SqlHelper.ExecuteTable("select * From Users where UserName=@UserName and Password =@Password",
                 new SqlParameter("UserName", UserName),
                 new SqlParameter("Password", Password)
                 );
             //防止有多条数据，可能用户的名称和密码会有重复的，为了防止有重复的,for循环一下,然后把它放在user的集合里面
-            List<Users> userList = new List<Users>();
-            for(int i = 0; i < res.Rows.Count; i++)
-            {
-                DataRow row = res.Rows[i];
-                userList.Add(new Users
-                {
-                    UserNo = row["UserNo"].ToString(),
-                    UserName = row["UserName"].ToString(),
-                    UserLevel = row["UserLevel"].ToString(),
-                    Password = row["Password"].ToString(),
-                });
-
-            }
-            if (res.Rows.Count ==1)
-            {
-                return true;
-            }
-            return false;
-
+            //List<Users> userList = new List<Users>();
+            //for(int i = 0; i < res.Rows.Count; i++)
+            //{
+            //    DataRow row = res.Rows[i];
+            //    //userList.Add(new Users
+            //    //{
+            //    //    UserNo = row["UserNo"].ToString(),
+            //    //    UserName = row["UserName"].ToString(),
+            //    //    UserLevel = row["UserLevel"].ToString(),
+            //    //    Password = row["Password"].ToString(),
+            //    //});
+            //  Users user = ToModel(row);
+            //}
+            List<Users> userList = ToModelList(res);
+            return userList;
         }
         public Users GetUserById(string UserNo)
         {
@@ -47,11 +50,13 @@ namespace myBbsWebApi.Dal
             {
                 row = res.Rows[0];
             }
-            Users user = new Users();
-            user.UserNo = row["UserNo"].ToString();
-            user.UserName = row["UserName"].ToString();
-            user.UserLevel = row["UserLevel"].ToString();
-            user.Password = row["Password"].ToString();
+            //Users user = new Users();
+            //user.UserNo = row["UserNo"].ToString();
+            //user.UserName = row["UserName"].ToString();
+            //user.UserLevel = row["UserLevel"].ToString();
+            //user.Password = row["Password"].ToString();
+            //模型映射封装
+            Users user = ToModel(row);
             return user;
         }
 
@@ -95,6 +100,30 @@ namespace myBbsWebApi.Dal
                 "delete from Users where UserNo=@UserNo",
                 new SqlParameter("@UserNo", UserNo)
                 );
+        }
+
+        private Users ToModel(DataRow row)
+        {
+            Users user = new Users();
+            user.UserNo = row["UserNo"].ToString();
+            user.UserName = row["UserName"].ToString();
+            user.UserLevel = row["UserLevel"].ToString();
+            user.Password = row["Password"].ToString();
+            //user.IsDelete = (bool)row["IsDelete"];
+            user.IsDelete = row["IsDelete"].ToString();
+            return user;
+        }
+
+        private List<Users> ToModelList(DataTable table)
+        {
+            List<Users> userList = new List<Users>();
+            for(int i = 0; i < table.Rows.Count; i++)
+            {
+                DataRow row = table.Rows[i];
+                Users user = ToModel(row);
+                userList.Add(user);
+            }
+            return userList;
         }
     }
 }

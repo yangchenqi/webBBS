@@ -2873,11 +2873,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\File\\myBbsWebApi\\myBbsWebApi\\myBbsWebApi.csproj",
+      "projectUniqueName": "D:\\File\\webBBS\\myBbsWebApi\\myBbsWebApi\\myBbsWebApi.csproj",
       "projectName": "myBbsWebApi",
-      "projectPath": "D:\\File\\myBbsWebApi\\myBbsWebApi\\myBbsWebApi.csproj",
+      "projectPath": "D:\\File\\webBBS\\myBbsWebApi\\myBbsWebApi\\myBbsWebApi.csproj",
       "packagesPath": "C:\\Users\\yangche\\.nuget\\packages\\",
-      "outputPath": "D:\\File\\myBbsWebApi\\myBbsWebApi\\obj\\",
+      "outputPath": "D:\\File\\webBBS\\myBbsWebApi\\myBbsWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\yangche\\AppData\\Roaming\\NuGet\\NuGet.Config",

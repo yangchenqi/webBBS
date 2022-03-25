@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using myBbsWebApi.Bll;
+using myBbsWebApi.Bll.Interfaces;
 using myBbsWebApi.Core;
 using myBbsWebApi.Dal;
 using myBbsWebApi.Models;
@@ -17,19 +19,35 @@ namespace myBbsWebApi.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        [HttpGet]
-        public string Get(string UserName, string pwd)
+        private readonly IuserBll _userBll;
+        //直接在构造函数里面引用，下面就直接使用即可，不用每次都再new一下：UserBll userBll = new UserBll();
+        public LoginController(UserBll userBll)
         {
-            UserDal userDal = new UserDal();
-            bool hasUser= userDal.GetUserByUserNameAndPassword(UserName, pwd);
-             if (hasUser)
-            {
-                return "登录成功";
-            }
-            else
-            {
-                return "登录失败";
-            }
+            _userBll = userBll;
+        }
+
+        [HttpGet]
+        public List<Users> GetAll()
+        {
+            List<Users> userList=_userBll.GetAll();
+            return userList;
+        }
+        [HttpGet]
+        public Users GetLoginRes(string UserName, string pwd)
+        {
+            //UserDal userDal = new UserDal();
+            //bool hasUser= userDal.GetUserByUserNameAndPassword(UserName, pwd);
+            // if (hasUser)
+            //{
+            //    return "登录成功";
+            //}
+            //else
+            //{
+            //    return "登录失败";
+            //}
+            UserBll userBll = new UserBll();
+            Users user = userBll.CheckLogin(UserName, pwd);
+            return user;
         }
 
         [HttpPost]
